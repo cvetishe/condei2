@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html"
+      xmlns:color="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Ввод параметров</title>
 </head>
-<body>
+<body style="background-color: #BBFFEE">
 <form action="/temperature">
-t в комнате <input name ="t_r">
+    <em>t в комнате <input name ="t_r"></em>
 <br>
 <br>
-требуемая t <input name ="t_c">
+    <em>Требуемая t <input name ="t_c"></em>
 <br>
 <br>
-режим кондиционера <input name ="mode">
-
+    <em>Режим кондиционера <input name ="mode"></em>
 <p>________________________________________</p>
-
-<button>Задать параметры</button>
+    <button style="background-color: #99FFFF; border-color: #33CCFF">Задать параметры</button>
 </form>
+<br>
+<p th:if="${temp_required!=null}"></p>
+<p>
+    <em>
+        <ins>
+    Через час t в помещении достигнет отметки></font> <span th:text="${temp_required}"></span> градусов>
+        </ins>
+    </em>
+</p>
+<br>
+<div th:if="${mistake!=null}">
+    Ошибка: <span th:text="${mistake}"></span></div>
 <br>
 <form action="/history">
-    <button>Вывести ранее заданные режимы</button>
+    <button style="background-color: #D1BBFF; border-color: #B088FF">Вывести ранее заданные режимы</button>
 </form>
-
+<p th:if="${message!=mull}"> <span th:text="${message}"></span></p>
 </body>
 </html>

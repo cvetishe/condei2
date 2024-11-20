@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Расчёт температуры</title>
+</head>
+<body>
+Через час t в помещении достигнет = <span th:text="${temp_required}"></span> градусов
+<div th:if="${mistake!=null}">
+    Ошибка: <span th:text="${mistake}"></span></div>
+
+</body>
+</html>

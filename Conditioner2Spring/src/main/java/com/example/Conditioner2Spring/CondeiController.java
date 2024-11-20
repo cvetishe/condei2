@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.stream.Collectors;
+
 @Controller
 public class CondeiController {
     @Autowired
@@ -21,20 +23,19 @@ public class CondeiController {
             int temp_room = Integer.parseInt(t_r);
             int temp_cond = Integer.parseInt(t_c);
             Conditioner c = new Conditioner(temp_room,temp_cond, mode);
-            model.addAttribute("temp_room", c.t_room);
-            model.addAttribute("temp_cond", c.t_cond);
-            model.addAttribute("mode", c.mode);
+            model.addAttribute("temp_required", c.getResultTemp());
             condeiService.add(c);
         } catch (Exception e){
             System.out.println(e.getMessage());
             model.addAttribute("mistake");
         }
-        return "calcTemp";
+        return "AirConditioningControl";
     }
 
     @GetMapping("/history")
     public String showHistory(Model m){
-        m.addAttribute("message", condeiService.getConditioner().toString());
-        return "history";
+        m.addAttribute("message",
+                condeiService.getConditioner());
+        return "AirConditioningControl";
     }
 }
